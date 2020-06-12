@@ -27,15 +27,16 @@ public class Animal {
 
 	 */
 	
-	String espece;
-	Boolean sexe;
-	String taille;
-	int age;
-	String faim;
-	String sommeil;
-	String sante;
+	protected String espece;
+	protected Boolean sexe;
+	protected String taille;
+	protected int age;
+	protected String faim;
+	protected String sommeil;
+	protected String sante;
 	
 	
+	protected String deplacement;
 	/*
 	   manger (lorsqu’ils ne dorment pas) ;
 	émettre un son ;
@@ -43,9 +44,9 @@ public class Animal {
 	 s’endormir ou se réveille
 	 */
 	
-	public Animal(String espece,String taille,Boolean sexe) {
+	public Animal(String espece,String taille) {
 		 this.espece=espece;
-		 this.sexe=sexe;
+		 this.sexe=RandomSexe(); //TRUE = F && FALSE = H
 		 this.taille=taille;
 		 this.age=(int) (Math.random() * ((5 - 0) + 1));
 		 this.faim=RandomSanteSommeilFaim("faim");
@@ -53,8 +54,8 @@ public class Animal {
 		 this.sante=RandomSanteSommeilFaim("sante");	
 	}
 	
-	public String ModeDeplacement() {
-		
+	public void setDeplacement(String a) {
+		deplacement=a;	
 	}
 	
 	
@@ -107,11 +108,11 @@ public class Animal {
 	}
 	
 	public String DormirEveiller() {
-		String message="l'animal doit être éveillé pour cela";
+		String message="";
 		
 		if(sommeil =="dort") {
 			sommeil="eveille";
-			message="l'animal est éveillé";
+			message="l'annimal est éveillé";
 
 			}else {
 				sommeil="dort";
@@ -125,21 +126,68 @@ public class Animal {
 	
 	
 	public String Soigner() {
-		String message="l'animal doit être éveillé pour cela";
+		String message="l'animal est déjà en parfaite sante";
 		
-		if(sommeil =="dort") {
-			sommeil="eveille";
-			message="l'animal est éveillé";
+		if(sante =="malade") {
+			sante="bon";
+			message="l'animal a été soigné";
 
-			}else {
-				sommeil="dort";
-				message="zzZZzz";
 			}
-		
-		
-		
+	
 		return message;
 	}
+	
+	public boolean RandomSexe() {
+		double randomdonnees=(Math.random() * ((100 - 0) + 1));
+		if(randomdonnees>50) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	public void ConnaitreSante() {
+		if(sante =="malade") {
+	System.out.println("Cet annimal est malade");
+
+			}else
+	System.out.println("Cet annimal est en bonne santé");
+	}
+	
+	public void Connaitresommeil() {
+		if(sommeil =="dort") {
+	System.out.println("Cet annimal dort paisiblement");
+
+			}else
+	System.out.println("Cet annimal ne dort pas");
+	}
+	
+	public void ConnaitreFaim() {
+		if(faim =="affamé") {
+	System.out.println("Cet annimal est affamé");
+
+			}else if(faim=="faim") {
+				System.out.println("Cet annimal a faim");			
+			}else {
+				System.out.println("Cet annimal est rassasié");
+			}
+	
+	}
+	
+	
+	public void ConnaitreSexe() {
+		if(sexe) {
+	System.out.println("Cet annimal est affamé");
+
+			}else {
+				System.out.println("Cet annimal est rassasié");
+			}
+	
+	}	
+	
+	
+	
+	
 	
 	
 }
